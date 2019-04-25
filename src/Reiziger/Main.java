@@ -13,7 +13,8 @@ public class Main {
 
         String[] names = {"Floris", "Lennart", "Poppy", "Esther", "Kiki", "Marco", "Test"};
 
-        for(int i=0; i < names.length; i++) {
+
+        for(String name: names) {
             int randomYear = ThreadLocalRandom.current().nextInt(1990, 2010 + 1);
             int randomMonth = ThreadLocalRandom.current().nextInt(1, 12 + 1);
             int randomDay = ThreadLocalRandom.current().nextInt(1, 31 + 1);
@@ -25,7 +26,7 @@ public class Main {
                 randomDay = 28;
             }
             Date gbD = java.sql.Date.valueOf(String.format("%s-%s-%s", randomYear,randomMonth,randomDay));
-            Reiziger reiziger = new Reiziger(names[i], gbD);
+            Reiziger reiziger = new Reiziger(name, gbD);
             System.out.println(reiziger.toString() + " wordt toegevoegd...");
             reizigerConnection.save(reiziger);
             System.out.println(reiziger.toString() + " is toegevoegd!");
@@ -60,7 +61,7 @@ public class Main {
 
         System.out.println("Verwijder test van de reizigers:");
         List<Reiziger> toRemoveL = reizigerConnection.findByName("test");
-        toRemoveL.forEach(r -> reizigerConnection.delete(r));
+        toRemoveL.forEach(reizigerConnection::delete);
 
         System.out.println("Alle reizigers: ");
         temp = reizigerConnection.findAll();
