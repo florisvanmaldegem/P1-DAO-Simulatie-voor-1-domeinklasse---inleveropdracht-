@@ -90,10 +90,13 @@ public class Main {
          */
         System.out.println("Vervang reiziger daan met floris");
         Reiziger floris = reizigerConnection.findByName("Floris").get(0);
-        floris.setId(2020);
         reizigerConnection.update(floris, 2020);
 
-        System.out.println(reizigerConnection.findById(2020));
+        System.out.println("Alle reizigers: ");
+        temp = reizigerConnection.findAll();
+        for(Reiziger r : temp){
+            System.out.println(r);
+        }
         System.out.println();
 
     }

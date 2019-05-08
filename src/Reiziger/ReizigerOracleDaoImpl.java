@@ -80,6 +80,8 @@ public class ReizigerOracleDaoImpl implements ReizigerDAO {
     public Reiziger update(Reiziger reiziger, int id){
         for(Reiziger r : this.reizigers){
             if(r.getId() == id){
+                this.delete(reiziger);
+                reiziger.setId(id);
                 this.reizigers.set(this.reizigers.indexOf(r), reiziger);
                 return reiziger;
             }
