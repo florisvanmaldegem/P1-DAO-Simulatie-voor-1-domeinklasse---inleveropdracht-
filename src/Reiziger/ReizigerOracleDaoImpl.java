@@ -18,6 +18,16 @@ public class ReizigerOracleDaoImpl implements ReizigerDAO {
     }
 
     @Override
+    public Reiziger findById(int id) {
+        for(Reiziger r : this.reizigers){
+            if(r.getId() == id){
+                return r;
+            }
+        }
+        return new Reiziger(0, "test", java.sql.Date.valueOf("2000-01-01"));
+    }
+
+    @Override
     public List<Reiziger> findByGbDatum(String gbDatum) {
         ArrayList<Reiziger> rl = new ArrayList<>();
 
@@ -45,6 +55,11 @@ public class ReizigerOracleDaoImpl implements ReizigerDAO {
     @Override
     public Reiziger save(Reiziger reiziger) {
         if(!this.reizigers.contains(reiziger)) {
+            for(Reiziger r : this.reizigers){
+                if(r.getId() == reiziger.getId()){
+                    return reiziger;
+                }
+            }
             this.reizigers.add(reiziger);
         }
 
@@ -62,13 +77,14 @@ public class ReizigerOracleDaoImpl implements ReizigerDAO {
     }
 
     @Override
-    public Reiziger update(Reiziger reiziger){
+    public Reiziger update(Reiziger reiziger, int id){
         for(Reiziger r : this.reizigers){
-            if(r.equals(reiziger)){
-                return r;
+            if(r.getId() == id){
+                this.reizigers.set(this.reizigers.indexOf(r), reiziger);
+                return reiziger;
             }
         }
-        return new Reiziger("naam", java.sql.Date.valueOf(LocalDate.now()));
+        return new Reiziger(0,"naam", java.sql.Date.valueOf(LocalDate.now()));
     }
 
     @Override

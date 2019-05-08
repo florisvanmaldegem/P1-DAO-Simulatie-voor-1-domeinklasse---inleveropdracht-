@@ -4,12 +4,22 @@ import java.sql.Date;
 
 public class Reiziger {
 
+    private int id;
     private String naam;
     private Date gbdatum;
 
-    public Reiziger(String n, Date gbd){
+    public Reiziger(int i, String n, Date gbd){
+        this.id = i;
         this.naam = n;
         this.gbdatum = gbd;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     public String getNaam() {
@@ -30,6 +40,6 @@ public class Reiziger {
 
     @Override
     public String toString() {
-        return "Reiziger: " + this.naam + ", " + this.gbdatum.toString();
+        return "Reiziger: " + this.naam + ", " + this.gbdatum.toString() + ", ID: " + this.id;
     }
 }
